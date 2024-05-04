@@ -5,6 +5,11 @@ from uuid import uuid4
 # Create your models here.
 
 class Category(models.Model):
+    """
+    Represents a category for grouping related content.
+    :param name: The name of the category
+    :returns: String respresentation of the category.
+    """
     name = models.TextField(max_length=100)
 
     def __str__(self) -> str:
@@ -12,6 +17,13 @@ class Category(models.Model):
 
 
 class Author(models.Model):
+    """
+    Represents an author who writes content.
+
+    :param name: The name of the author.
+    :param short_biography: A brief biography or description of the author.
+    :returns: String representation of the author.
+    """
     name = models.TextField(max_length=100)
     short_biography = models.TextField(max_length=1000)
     
@@ -20,6 +32,12 @@ class Author(models.Model):
 
 
 class Tag(models.Model):
+    """
+    Represents a tag for categorizing or labeling content.
+
+    :param name: The name of the tag.
+    :returns: String representation of the tag.
+    """
     name = models.CharField(max_length=50)
 
     def __str__(self):
@@ -27,11 +45,24 @@ class Tag(models.Model):
 
 
 def upload_to(filename):
+    """
+    Generates upload path for book covers.
+
+    :param filename: Name of the file.
+    :returns: Upload path for the book cover.
+    """
     uuid = str(uuid4())[:8]
     return '/books/covers/{}'.format(filename + uuid),
 
 
 class Series(models.Model):
+    """
+    Represents a series of books.
+
+    :param name: The name of the series.
+    :param description: Description of the series (optional).
+    :returns: String representation of the series.
+    """
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True)
 
@@ -40,6 +71,22 @@ class Series(models.Model):
 
 
 class Book(models.Model):
+    """
+    Represents a book.
+
+    :param title: The title of the book.
+    :param author: The author of the book.
+    :param cover: The cover image of the book.
+    :param description: Description of the book.
+    :param category: The category of the book (optional).
+    :param publication_date: Publication date of the book.
+    :param isbn: ISBN of the book.
+    :param tags: Tags associated with the book (optional).
+    :param edition: Edition of the book (optional).
+    :param series: The series to which the book belongs (optional).
+    :param volume: The volume number if part of a series (optional).
+    :returns: String representation of the book.
+    """
     title = models.TextField(max_length=255, blank=False)
     author = models.ForeignKey(Author, on_delete=models.PROTECT, related_name='books')
     cover = models.ImageField(
@@ -59,6 +106,14 @@ class Book(models.Model):
         return f'{self.title} by {self.author}'
     
 class BookInstance(models.Model):
+    """
+    Represents an instance of a book.
+
+    :param book: The book associated with the instance.
+    :param condition: The condition of the book instance.
+    :param availability_status: The availability status of the book instance.
+    :returns: String representation of the book instance.
+    """
     CONDITION_CHOICES = (
         ('new', 'New'),
         ('like_new', 'Like New'),
