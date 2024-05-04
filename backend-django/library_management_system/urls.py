@@ -19,6 +19,9 @@ from django.urls import path, include
 from django.views.generic import TemplateView
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
+from rest_framework.schemas import get_schema_view
+from rest_framework.documentation import include_docs_urls
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
@@ -31,4 +34,11 @@ urlpatterns = [
     # User management
     path('api/user/', include('accounts.urls', namespace='accounts')),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+
+    # Documentation
+    path('docs/', include_docs_urls(title='LibraryAPI')),
+    path('schema/', get_schema_view(title="LibraryAPI",
+                                    description='Api for the LibraryAPI',
+                                    version='1.0.0',),
+                                    name='openapi-schema')
 ]
