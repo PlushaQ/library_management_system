@@ -26,6 +26,8 @@ urlpatterns = [
 
     path('', TemplateView.as_view(template_name='utils/index.html')),
     
+    path('api/', include('books.urls', namespace='books')),
+
     # User management
     path('api/user/', include('accounts.urls', namespace='accounts')),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),

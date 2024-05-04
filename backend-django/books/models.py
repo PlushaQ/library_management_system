@@ -1,8 +1,10 @@
 from django.db import models
+from django.utils.deconstruct import deconstructible
 
 from uuid import uuid4
 
-# Create your models here.
+
+
 
 class Category(models.Model):
     """
@@ -44,15 +46,22 @@ class Tag(models.Model):
         return self.name
 
 
-def upload_to(filename):
+@deconstructible
+class CustomUploadPath:
     """
     Generates upload path for book covers.
 
     :param filename: Name of the file.
     :returns: Upload path for the book cover.
     """
-    uuid = str(uuid4())[:8]
-    return '/books/covers/{}'.format(filename + uuid),
+    def __init__(self, sub_path):
+        self.sub_path = sub_path
+
+    def __call__(self, instance, filename):
+        ext = filename.split('.')[-1]
+        filename = f"{uuid4().hex}.{ext}"
+        return f"{self.sub_path}/{filename}"
+
 
 
 class Series(models.Model):
@@ -69,6 +78,8 @@ class Series(models.Model):
     def __str__(self):
         return self.name
 
+
+upload_to = CustomUploadPath('books/covers')
 
 class Book(models.Model):
     """
@@ -87,6 +98,7 @@ class Book(models.Model):
     :param volume: The volume number if part of a series (optional).
     :returns: String representation of the book.
     """
+
     title = models.TextField(max_length=255, blank=False)
     author = models.ForeignKey(Author, on_delete=models.PROTECT, related_name='books')
     cover = models.ImageField(
@@ -94,7 +106,7 @@ class Book(models.Model):
         default='/books/covers/default.jpg',
         )
     description = models.TextField(max_length=5000)
-    category = models.ManyToManyField(Category, default=1)
+    category = models.ManyToManyField(Category, default=[1])
     publication_date = models.DateField()
     isbn = models.CharField(max_length=13)
     tags = models.ManyToManyField(Tag, blank=True)
