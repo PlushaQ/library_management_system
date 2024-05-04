@@ -27,3 +27,31 @@ class BookDetail(generics.RetrieveAPIView):
     permission_classes = [AllowAny]
     queryset = Book.objects.all()
     serializer_class = BookSerializer
+
+
+class BookByFilter(generics.ListAPIView):
+    """
+    A view for retrieving a list of books filtered by author, tag, or category.
+
+    This view allows any user to retrieve a list of books based on specified filters.
+    """
+    permission_classes = [AllowAny] 
+    serializer_class = BookSerializer
+
+    def get_queryset(self):
+        queryset = Book.objects.all() 
+        
+        # Retrieve query parameters for filtering
+        author_id = self.request.query_params.get('author_id')
+        tag_id = self.request.query_params.get('tag_id')
+        category_id = self.request.query_params.get('category_id')
+
+        # Apply filters if provided
+        if author_id:
+            queryset = queryset.filter(author__id=author_id)
+        if tag_id:
+            queryset = queryset.filter(tags__id=tag_id)
+        if category_id:
+            queryset = queryset.filter(category__id=category_id)
+        
+        return queryset
