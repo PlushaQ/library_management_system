@@ -27,7 +27,8 @@ class Tag(models.Model):
 
 
 def upload_to(filename):
-    return '/books/covers/{}'.format(filename + uuid4()[:8]),
+    uuid = str(uuid4())[:8]
+    return '/books/covers/{}'.format(filename + uuid),
 
 
 class Series(models.Model):
