@@ -1,5 +1,5 @@
 from django.test import TestCase
-from ..models import Book, Author, Category, Tag, BookInstance, Series
+from ..models import Book, Author, Category, Tag, Series
 from ..serializers import BookSerializer
 
 

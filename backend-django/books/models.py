@@ -4,8 +4,6 @@ from django.utils.deconstruct import deconstructible
 from uuid import uuid4
 
 
-
-
 class Category(models.Model):
     """
     Represents a category for grouping related content.

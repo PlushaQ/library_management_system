@@ -5,6 +5,7 @@ from rest_framework.test import APIClient
 
 from ..models import Author, Category, Tag, Series, Book
 
+
 class TestUrls(TestCase):
     def setUp(self):
         self.client = APIClient()
