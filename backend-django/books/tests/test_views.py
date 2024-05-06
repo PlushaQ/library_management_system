@@ -4,16 +4,6 @@ from rest_framework import status
 from rest_framework.test import APIClient
 from ..models import Book, Author, Category, Tag, Series
 
-class colors:
-    RED = '\033[91m'
-    GREEN = '\033[92m'
-    YELLOW = '\033[93m'
-    BLUE = '\033[94m'
-    MAGENTA = '\033[95m'
-    CYAN = '\033[96m'
-    WHITE = '\033[97m'
-    RESET = '\033[0m'  # Reset to default color
-
 
 class BookViewsTestCase(TestCase):
     def setUp(self):
