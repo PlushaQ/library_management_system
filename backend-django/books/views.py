@@ -45,6 +45,7 @@ class BookByFilter(generics.ListAPIView):
         author_id = self.request.query_params.get('author_id')
         tag_id = self.request.query_params.get('tag_id')
         category_id = self.request.query_params.get('category_id')
+        series_id = self.request.query_params.get('series_id')
 
         # Apply filters if provided
         if author_id:
@@ -53,5 +54,7 @@ class BookByFilter(generics.ListAPIView):
             queryset = queryset.filter(tags__id=tag_id)
         if category_id:
             queryset = queryset.filter(category__id=category_id)
+        if series_id:
+            queryset = queryset.filter(series__id=series_id)
         
         return queryset

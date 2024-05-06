@@ -2,6 +2,7 @@ from django.test import TestCase
 from ..models import Book, Author, Category, Tag, BookInstance, Series
 from ..serializers import BookSerializer
 
+
 class BookSerializerTestCase(TestCase):
     def setUp(self):
         self.author = Author.objects.create(name="Test Author")
@@ -14,6 +15,7 @@ class BookSerializerTestCase(TestCase):
             title="Test Book",
             author=self.author,
             series=self.series,
+            publication_date='2024-05-06',
         )
         self.book.tags.add(self.tag1, self.tag2)
         self.book.category.add(self.category1, self.category2)
@@ -27,14 +29,16 @@ class BookSerializerTestCase(TestCase):
         self.assertIn('author', self.serialized_data)
         self.assertIn('category', self.serialized_data)
         self.assertIn('series', self.serialized_data)
-
-        self.assertTrue(self.book_serializer.is_valid())
     
     def test_book_serialized_data(self):
         self.assertEqual(self.serialized_data['title'], self.book.title)
-        self.assertEqual(self.serialized_data['author'], self.book.author.id)
-        self.assertEqual(self.serialized_data['category'], self.book.category)
-        self.assertEqual(self.serialized_data['series'], self.book.series)
+        self.assertEqual(self.serialized_data['author']['id'], self.book.author.id)
+
+        serialized_category_ids = [category['id'] for category in self.serialized_data['category']]
+        category_ids = [category.id for category in self.book.category.all()]
+        self.assertEqual(set(serialized_category_ids), set(category_ids))
+
+        self.assertEqual(self.serialized_data['series']['id'], self.book.series.id)
     
     def test_book_many_to_many_fields(self):
         self.assertEqual(len(self.serialized_data['tags']), self.book.tags.count())
@@ -45,10 +49,6 @@ class BookSerializerTestCase(TestCase):
         self.assertEqual(self.serialized_data['series']['name'], self.book.series.name)
         self.assertIn('author', self.serialized_data)
         self.assertEqual(self.serialized_data['author']['name'], self.book.author.name)
-
-    def test_nested_serializer_validity(self):
-        self.assertTrue(self.book_serializer['author'].is_valid())
-        self.assertTrue(self.book_serializer['series'].is_valid())
 
     def test_book_validation(self):
         invalid_data = {'title': '', 'author': '', 'series': ''}
