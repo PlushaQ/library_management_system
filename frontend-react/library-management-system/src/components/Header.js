@@ -12,11 +12,12 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import { styled } from '@mui/system';
+import { Hidden } from '@mui/material';
 
-const pages = ['Products', 'Pricing', 'Blog'];
+const pages = ['First subpage', 'Second Page', 'Third Page'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-function ResponsiveAppBar() {
+function Header() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -36,14 +37,16 @@ function ResponsiveAppBar() {
   };
 
 const StyledAppBar = styled(AppBar)({
-    backgroundColor: '#1976d2',
+    backgroundColor: '#522E46',
 });
 
   return (
     <StyledAppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-            <img src="/logo500x500.png" alt="logo" style={{height: 50}}/>
+          <Hidden mdDown> {/* Hide on screens smaller than medium */}
+            <img src="/logo500x500.png" alt="logo" style={{ height: 50 }} />
+          </Hidden>
           <Typography
             variant="h6"
             noWrap
@@ -162,4 +165,4 @@ const StyledAppBar = styled(AppBar)({
     </StyledAppBar>
   );
 }
-export default ResponsiveAppBar;
+export default Header;
