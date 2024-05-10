@@ -134,7 +134,7 @@ const StyledAppBar = styled(AppBar)({
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt="Remy Sharp" src="/logo192.png" />
               </IconButton>
             </Tooltip>
             <Menu
@@ -148,7 +148,7 @@ const StyledAppBar = styled(AppBar)({
               keepMounted
               transformOrigin={{
                 vertical: 'top',
-                horizontal: 'right',
+                horizontal: 'left',
               }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
