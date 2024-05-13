@@ -1,18 +1,39 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
+
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import reportWebVitals from './reportWebVitals';
+import { ThemeProvider, createTheme } from '@mui/material';
+
 import App from './App';
 import Header from './components/header/Header'
-import reportWebVitals from './reportWebVitals';
 import Footer from './components/Footer';
+import Login from './components/auth/Login'
+import Register from './components/auth/Register'
+import Logout from './components/auth/Logout';
+
+const theme = createTheme()
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
 root.render(
-  <React.StrictMode>
-    <Header />
-    <App />
-    <Footer />
-  </React.StrictMode>
+  <Router>
+    <React.StrictMode>
+      <ThemeProvider theme={theme}>
+        <Header />
+        <Routes>
+          <Route exact path="/" element={<App />} />
+
+          {/* Auth routes */}
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/logout" element={<Logout />} />
+        </Routes>
+        <Footer />
+      </ThemeProvider>
+    </React.StrictMode>
+  </Router>
 );
 
 // If you want to start measuring performance in your app, pass a function
