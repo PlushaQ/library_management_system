@@ -74,7 +74,7 @@ export default function Login() {
 	};
 
 	return (
-        <Container component="main" maxWidth="xs" style={{marginBottom: "50px"}}>
+        <Container component="main" maxWidth="xs" style={{height: "60vh"}}>
           <CssBaseline />
           <StyledPaper>
             <StyledAvatar />
