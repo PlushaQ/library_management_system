@@ -3,6 +3,8 @@ import Container from '@mui/material/Container';
 import { styled } from '@mui/system';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
+import Link from '@mui/material/Link';
+import Typography from '@mui/material/Typography'
 
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -15,6 +17,11 @@ const Item = styled(Paper)(({ theme }) => ({
 const LiItem = styled('li')({
     color: 'white',
 })
+
+const StyledLink = styled(Link)(({theme}) => ({
+  textDecoration: 'none',
+  color: 'inherit',
+}))
 
 const navbarItems = [
   {
@@ -33,11 +40,25 @@ const navbarItems = [
     description: [1, 2, 3]}
 ];
 
+
 const StyledContainer = styled(Container)(({ theme }) => ({
     padding: theme.spacing(4),
     backgroundColor: '#522E46',
 
 }))
+
+function Copyright() {
+  return (
+    <Typography variant="body2" color="white" align="center">
+      {'Copyright © '}
+      <Link color="inherit" href="/">
+        LibraSage
+      </Link>{' '}
+      {new Date().getFullYear()}
+      {'.'}
+    </Typography>
+  );
+}
 
 function Footer() {
   return (
@@ -49,12 +70,17 @@ function Footer() {
                 <Item elevation={0}>{navPart.title}</Item>
                 <ul>
                   {navPart.description.map((desc) => (
-                    <LiItem key={desc}>{desc}</LiItem>
+                    <LiItem key={desc}>
+                      <StyledLink href='#'>{desc}</StyledLink>
+                    </LiItem>
                   ))}
                 </ul>
               </Grid>
             ))}
           </Grid>
+          <br></br>
+          <Copyright/>
+      
       </StyledContainer>
       </>
   );
