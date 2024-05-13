@@ -7,8 +7,25 @@ import MenuItem from '@mui/material/MenuItem';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 
+import { isLoggedIn } from '../../utils/auth';
+
+
 function UserMenu() {
-    const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+    const userLoggedIn = isLoggedIn()
+
+    const loggedInSettings = [
+        { name: 'Profile', url: '/profile' },
+        { name: 'Account', url: '/account' },
+        { name: 'Dashboard', url: '/dashboard' },
+        { name: 'Logout', url: '/logout' }
+    ];
+    
+    const logoutSettings = [
+        { name: 'Login', url: '/login' },
+        { name: 'Register', url: '/register' }
+    ];
+
+    const settings = userLoggedIn ? loggedInSettings : logoutSettings
 
     const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -51,12 +68,12 @@ function UserMenu() {
         {/* User settings menu items */}
         {settings.map((setting) => (
             <MenuItem
-            key={setting}
-            href="#"
+            key={setting.name}
+            href={setting.url}
             component="a"
             onClick={handleCloseUserMenu}
             >
-                <Typography textAlign="center">{setting}</Typography>
+                <Typography textAlign="center">{setting.name}</Typography>
             </MenuItem>
         ))}
         </Menu>
