@@ -17,36 +17,45 @@ import { Hidden } from '@mui/material';
 const pages = ['First subpage', 'Second Page', 'Third Page'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
+
 function Header() {
+  // State for menu anchor elements
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
+  // Handlers for opening and closing navigation menu
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
+    
   };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
-  };
-
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
+  };
+
+  // Handlers for opening and closing user menu
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
   };
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
 
-const StyledAppBar = styled(AppBar)({
+  // Styling the AppBar
+  const StyledAppBar = styled(AppBar)({
     backgroundColor: '#522E46',
-});
+  });
 
   return (
     <StyledAppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
+          {/* Logo */}
           <Hidden mdDown> {/* Hide on screens smaller than medium */}
             <img src="/logo500x500.png" alt="logo" style={{ height: 50 }} />
           </Hidden>
+
+          {/* Logo text */}
           <Typography
             variant="h6"
             noWrap
@@ -65,6 +74,7 @@ const StyledAppBar = styled(AppBar)({
             LibraSage
           </Typography>
 
+          {/* Navigation menu icon */}
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
@@ -76,6 +86,7 @@ const StyledAppBar = styled(AppBar)({
             >
               <MenuIcon />
             </IconButton>
+            {/* Navigation menu */}
             <Menu
               id="menu-appbar"
               anchorEl={anchorElNav}
@@ -94,13 +105,21 @@ const StyledAppBar = styled(AppBar)({
                 display: { xs: 'block', md: 'none' },
               }}
             >
+              {/* Navigation menu items */}
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                <MenuItem
+                  key={page}
+                  href="/"
+                  component="a"
+                  onClick={handleCloseNavMenu}
+                >
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
             </Menu>
           </Box>
+
+          {/* Logo text for smaller screens */}
           <Typography
             variant="h5"
             noWrap
@@ -119,10 +138,15 @@ const StyledAppBar = styled(AppBar)({
           >
             LibraSage
           </Typography>
+
+          {/* Desktop nav menu */}
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+            {/* Desktop navigation menu items */}
             {pages.map((page) => (
               <Button
                 key={page}
+                href="test"
+                component="a"
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
@@ -131,15 +155,18 @@ const StyledAppBar = styled(AppBar)({
             ))}
           </Box>
 
+          {/* User settings menu */}
           <Box sx={{ flexGrow: 0 }}>
+            {/* Avatar button */}
             <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/logo192.png" />
+              <IconButton onClick={handleOpenUserMenu}>
+                <Avatar alt="User avatar" src="/logo192.png" />
               </IconButton>
             </Tooltip>
+            {/* User settings menu */}
             <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
+              sx={{ mt: '0', }}
+              id="menu-user-appbar"
               anchorEl={anchorElUser}
               anchorOrigin={{
                 vertical: 'top',
@@ -148,13 +175,20 @@ const StyledAppBar = styled(AppBar)({
               keepMounted
               transformOrigin={{
                 vertical: 'top',
-                horizontal: 'left',
+                horizontal: 'right',
               }}
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
+              
+              {/* User settings menu items */}
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                <MenuItem
+                  key={setting}
+                  href="#"
+                  component="a"
+                  onClick={handleCloseUserMenu}
+                >
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}
