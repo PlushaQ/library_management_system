@@ -6,7 +6,6 @@ import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 import { ThemeProvider, createTheme } from '@mui/material';
 
-import App from './App';
 import Header from './components/header/Header'
 import Footer from './components/Footer';
 import Homepage from './components/homepage/homepage';

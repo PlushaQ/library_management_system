@@ -4,9 +4,9 @@ import react from 'react'
 
 function Homepage() {
     return <>
-    <Container maxWidth='xl'>
+    <Container maxWidth='xl' style={{marginTop: '10vh', marginBottom: '50vh'}}>
         <Box>
-            <Typography variant='h1'>
+            <Typography variant='h1' textAlign={'center'}>
                 {'Welcome to LibraSage'}
             </Typography>
         </Box>

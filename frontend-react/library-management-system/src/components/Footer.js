@@ -44,6 +44,7 @@ const navbarItems = [
 const StyledContainer = styled(Container)(({ theme }) => ({
     padding: theme.spacing(4),
     backgroundColor: '#522E46',
+    marginTop: 'auto',
 
 }))
 
