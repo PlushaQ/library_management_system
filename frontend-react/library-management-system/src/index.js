@@ -9,6 +9,7 @@ import { ThemeProvider, createTheme } from '@mui/material';
 import Header from './components/header/Header'
 import Footer from './components/Footer';
 import Homepage from './components/homepage/homepage';
+import BookList from './components/books/bookList';
 import Login from './components/auth/Login'
 import Register from './components/auth/Register'
 import Logout from './components/auth/Logout';
@@ -24,7 +25,7 @@ root.render(
         <Header />
         <Routes>
           <Route exact path="/" element={<Homepage />} />
-
+          <Route path="/books" element={<BookList />} />
           {/* Auth routes */}
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
