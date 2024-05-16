@@ -1,13 +1,7 @@
 from rest_framework import serializers
-from .models import Book, Author, Category, Tag, BookInstance, Series
+from .models import Book, Category, Tag, BookInstance, Series
+from authors.serializers import AuthorSerializer
 
-class AuthorSerializer(serializers.ModelSerializer):
-    """
-    Serializer for the Author model. Serializes author data to and from JSON format.
-    """
-    class Meta:
-        model = Author
-        fields = '__all__'
 
 class CategorySerializer(serializers.ModelSerializer):
     """
