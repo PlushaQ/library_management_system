@@ -12,7 +12,7 @@ function NavMenu() {
   const pages = [
     {name: 'Books', url: '/books'},
     {name: 'Second Page', url:'#'},
-    {name: 'Second Page', url:'#'},];
+    {name: 'Third Page', url:'#'},];
   // State for menu anchor elements
   const [anchorElNav, setAnchorElNav] = React.useState(null);
 

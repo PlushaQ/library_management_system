@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axiosInstance from '../../axios';
 import { useNavigate } from 'react-router-dom';
 //MaterialUI
-import { Avatar } from '@mui/material';
+import { Alert, Avatar } from '@mui/material';
 import { Button } from '@mui/material';
 import { CssBaseline } from '@mui/material';
 import { TextField } from '@mui/material';
@@ -48,6 +48,7 @@ export default function SignUp() {
 	});
 
 	const [formData, updateFormData] = useState(initialFormData);
+	const [errorMessages, setErrorMessages] = useState({});
 
 	const handleChange = (e) => {
 		updateFormData({
@@ -71,6 +72,12 @@ export default function SignUp() {
 				navigate('/login');
 				console.log(res);
 				console.log(res.data);
+			}).catch((err) => {
+				if (err.response && err.response.data) {
+					setErrorMessages(err.response.data);
+				} else {
+					setErrorMessages({ general: ['An unexpected error occurred'] });
+				}
 			});
 	};
 
@@ -83,6 +90,19 @@ export default function SignUp() {
 				<Typography component="h1" variant="h5">
 					Sign up
 				</Typography>
+				{Object.keys(errorMessages).length > 0 && (
+					<Grid container spacing={2}>
+						{Object.entries(errorMessages).map(([key, messages]) => (
+							<Grid item xs={12} key={key}>
+								{messages.map((message, index) => (
+									<Alert severity="error" key={index}>
+										{message}
+									</Alert>
+								))}
+							</Grid>
+						))}
+					</Grid>
+				)}
 				<StyledForm noValidate>
 					<Grid container spacing={2}>
 						<Grid item xs={12}>

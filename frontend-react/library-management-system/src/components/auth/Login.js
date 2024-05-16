@@ -13,6 +13,7 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import styled from '@emotion/styled';
 import Container from '@mui/material/Container';
+import { Alert } from '@mui/material';
 
 
 const StyledPaper = styled('div')(({ theme }) => ({
@@ -45,6 +46,8 @@ export default function Login() {
 	});
 
 	const [formData, updateFormData] = useState(initialFormData);
+  const [errorMessages, setErrorMessages] = useState({});
+
 
 	const handleChange = (e) => {
 		updateFormData({
@@ -70,8 +73,15 @@ export default function Login() {
                     navigate('/');
                     console.log(res)
                     console.log(res.data)
+			}).catch((err) => {
+				if (err.response && err.response.data) {
+					setErrorMessages(err.response.data);
+				} else {
+					setErrorMessages({ general: ['An unexpected error occurred'] });
+				}
 			});
 	};
+
 
 	return (
         <Container component="main" maxWidth="xs" style={{marginBottom: '70px'}}>
@@ -81,6 +91,21 @@ export default function Login() {
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
+            {Object.entries(errorMessages).map(([key, messages]) => (
+              <Grid item xs={12} key={key}>
+                {Array.isArray(messages) ? (
+                  messages.map((message, index) => (
+                    <Alert severity="error" key={index}>
+                      {key}: {message}
+                    </Alert>
+                  ))
+                ) : (
+                  <Alert severity="error">
+                    {key}: {messages}
+                  </Alert>
+                )}
+              </Grid>
+            ))}
             <StyledForm>
               <TextField
                 variant="outlined"
