@@ -9,7 +9,10 @@ import MenuItem from '@mui/material/MenuItem';
 
 
 function NavMenu() {
-  const pages = ['First subpage', 'Second Page', 'Third Page'];
+  const pages = [
+    {name: 'Books', url: '/books'},
+    {name: 'Second Page', url:'#'},
+    {name: 'Second Page', url:'#'},];
   // State for menu anchor elements
   const [anchorElNav, setAnchorElNav] = React.useState(null);
 
@@ -59,12 +62,12 @@ function NavMenu() {
         {/* Navigation menu items */}
         {pages.map((page) => (
         <MenuItem
-            key={page}
-            href="/"
+            key={page.name}
+            href={page.url}
             component="a"
             onClick={handleCloseNavMenu}
         >
-            <Typography textAlign="center">{page}</Typography>
+            <Typography textAlign="center">{page.name}</Typography>
         </MenuItem>
         ))}
     </Menu>
@@ -95,13 +98,13 @@ function NavMenu() {
     {/* Desktop navigation menu items */}
     {pages.map((page) => (
         <Button
-        key={page}
-        href="test"
+        key={page.name}
+        href={page.url}
         component="a"
         onClick={handleCloseNavMenu}
         sx={{ my: 2, color: 'white', display: 'block' }}
         >
-        {page}
+        {page.name}
         </Button>
     ))}
     </Box>
