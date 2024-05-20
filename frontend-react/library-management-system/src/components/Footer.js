@@ -64,7 +64,9 @@ function Copyright() {
 function Footer() {
   return (
     <>
-      <StyledContainer maxWidth="false">
+      <StyledContainer sx={{
+        mt: 'auto'
+      }} maxWidth="false">
           <Grid container spacing={2}>
             {navbarItems.map((navPart) => (
               <Grid item xs={12} sm={3} key={navPart.title}>

@@ -13,6 +13,7 @@ import BookList from './components/books/bookList';
 import Login from './components/auth/Login'
 import Register from './components/auth/Register'
 import Logout from './components/auth/Logout';
+import BookDetail from './components/books/bookDetail';
 
 const theme = createTheme()
 
@@ -26,6 +27,7 @@ root.render(
         <Routes>
           <Route exact path="/" element={<Homepage />} />
           <Route path="/books" element={<BookList />} />
+          <Route path='/book-detail/:id' element={<BookDetail />} />
           {/* Auth routes */}
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />

@@ -58,7 +58,6 @@ export default function Login() {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		console.log(formData);
 
 		axiosInstance
 			.post(`token/`, {
@@ -71,7 +70,6 @@ export default function Login() {
 				axiosInstance.defaults.headers['Authorization'] =
 					'JWT ' + localStorage.getItem('access_token');
                     navigate('/');
-                    console.log(res)
                     console.log(res.data)
 			}).catch((err) => {
 				if (err.response && err.response.data) {

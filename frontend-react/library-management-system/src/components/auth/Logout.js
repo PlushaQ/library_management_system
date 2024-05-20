@@ -6,7 +6,6 @@ export default function Logout() {
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		console.log(localStorage.getItem('refresh_token'))
 		const response = axiosInstance.post('user/logout/blacklist/', {
 			refresh_token: localStorage.getItem('refresh_token'),
 		});

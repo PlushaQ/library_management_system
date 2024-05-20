@@ -70,7 +70,6 @@ export default function SignUp() {
 			})
 			.then((res) => {
 				navigate('/login');
-				console.log(res);
 				console.log(res.data);
 			}).catch((err) => {
 				if (err.response && err.response.data) {
