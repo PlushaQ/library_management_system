@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Card, CardContent, CardMedia, Typography, Box } from '@mui/material';
+import { Card, CardContent, CardMedia, Typography, Box, Alert, Container } from '@mui/material';
 import axiosInstance from '../../axios';
 import { useParams } from 'react-router-dom';
 import LoadingComponent from '../Loading';
@@ -15,17 +15,25 @@ const BookDetail = () => {
         axiosInstance.get(`/books/${id}`)
         .then((res) => {
             setBookData(res.data);
-            console.log(res.data)
             setLoading(false);
         })
         .catch((err) => {
-            setError(err);
+            setError(err.response);
             setLoading(false);
         });
     }, [id]);
 
     if (loading) {
         return <LoadingComponent />;
+    }
+
+    if (error) {
+        return <>
+        <Container sx={{ mt: '20px' }}
+        maxWidth='xl'>
+            <Alert variant="filled" severity="error"> {error.status}: {error.data.detail} </Alert>
+        </Container>
+        </>
     }
 
   return (
@@ -76,7 +84,7 @@ const BookDetail = () => {
             TO DO - Number of opinions
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            TO DO - Number of ratings
+            TO DO - Number of reviews
           </Typography>
         </Box>
       </Box>
