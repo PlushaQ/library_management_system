@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Card, CardContent, CardMedia, Typography, Box, Alert, Container } from '@mui/material';
+import { Card, CardContent, CardMedia, Typography, Box } from '@mui/material';
 import axiosInstance from '../../axios';
 import { useParams } from 'react-router-dom';
 import LoadingComponent from '../Loading';
+import ErrorPage from '../../utils/ErrorPage';
 
 const BookDetail = () => {
     const { id } = useParams()
@@ -28,12 +29,7 @@ const BookDetail = () => {
     }
 
     if (error) {
-        return <>
-        <Container sx={{ mt: '20px' }}
-        maxWidth='xl'>
-            <Alert variant="filled" severity="error"> {error.status}: {error.data.detail} </Alert>
-        </Container>
-        </>
+        return <ErrorPage error={error}/>
     }
 
   return (
