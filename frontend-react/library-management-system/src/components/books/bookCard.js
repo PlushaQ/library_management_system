@@ -4,6 +4,7 @@ import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import { Link } from '@mui/material';
 
 const BookCard = ({ book }) => {
   return (
@@ -18,10 +19,22 @@ const BookCard = ({ book }) => {
       </Box>
       <CardContent>
         <Typography variant="h6" component="div">
-          {book.title}
+          <Link
+          href={`/book-detail/${book.id}`}
+          color='inherit'
+          underline='hover'
+          >
+            {book.title}
+          </Link>
         </Typography>
         <Typography variant="subtitle1" color="text.secondary" component="div">
-          {book.author.name}
+        <Link
+          href={`/authors/${book.author.id}`}
+          color='inherit'
+          underline='hover'
+          >
+            {book.author.name}
+          </Link>
         </Typography>
       </CardContent>
     </Card>
