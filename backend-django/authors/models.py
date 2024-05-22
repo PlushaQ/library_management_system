@@ -1,6 +1,6 @@
 from django.db import models
 from utils.custom_upload_path import CustomUploadPath
-from categories.models import Category, Tag
+from books.models import Category, Tag
 
 # Create your models here.
 
