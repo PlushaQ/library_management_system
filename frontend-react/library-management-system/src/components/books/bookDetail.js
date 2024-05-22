@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Card, CardContent, CardMedia, Typography, Box } from '@mui/material';
 import axiosInstance from '../../axios';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import LoadingComponent from '../Loading';
 import ErrorPage from '../../utils/ErrorPage';
 
@@ -47,7 +47,13 @@ const BookDetail = () => {
           {bookData.title}
           </Typography>
           <Typography component="h2" variant="subtitle1" color="text.secondary">
-          {bookData.author.name}
+          <Link
+            href={`/authors/${bookData.author.id}`}
+            color='inherit'
+            underline='hover'
+          >
+              {bookData.author.name}
+            </Link>
           </Typography>
           <Typography variant="body2" color="text.secondary">
             <strong>Edition:</strong> {bookData.edition}
