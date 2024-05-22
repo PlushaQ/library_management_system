@@ -70,7 +70,7 @@ class Book(models.Model):
         default='/books/covers/default.jpg',
         )
     description = models.TextField(max_length=5000)
-    category = models.ManyToManyField(Category, default=[1])
+    category = models.ManyToManyField(Category, blank=True)
     publication_date = models.DateField()
     isbn = models.CharField(max_length=13)
     tags = models.ManyToManyField(Tag, blank=True)
