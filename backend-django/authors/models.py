@@ -1,6 +1,5 @@
 from django.db import models
 from utils.custom_upload_path import CustomUploadPath
-from books.models import Category, Tag
 
 # Create your models here.
 
@@ -26,8 +25,7 @@ class Author(models.Model):
     long_biography = models.TextField()
     birth_date = models.DateField(blank=True, null=True)
     death_date = models.DateField(blank=True, null=True)
-    categories = models.ManyToManyField(Category, blank=True)
-    tags = models.ManyToManyField(Tag, blank=True)
+    main_genre = models.CharField(blank=True, null=True)
     website = models.URLField(null=True, blank=True)
     photo = models.ImageField(
         upload_to=upload_to,
