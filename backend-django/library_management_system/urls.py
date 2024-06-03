@@ -34,6 +34,7 @@ urlpatterns = [
     path('', TemplateView.as_view(template_name='utils/index.html')),
     
     path('api/', include('books.urls', namespace='books')),
+    path('api/', include('authors.urls'), namespace='authors'),
 
     # User management
     path('api/user/', include('accounts.urls', namespace='accounts')),
