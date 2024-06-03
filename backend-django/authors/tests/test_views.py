@@ -85,8 +85,7 @@ class AuthorTests(APITestCase):
         author = Author.objects.get(id=self.author1.id)
         serializer = AuthorDetailsSerializer(author)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        
-        response_data = [{**item, 'photo': urlparse(item['photo']).path} for item in response.data]
+        response_data = {**response.data, 'photo': urlparse(response.data['photo']).path}
         self.assertEqual(response_data, serializer.data)
         
     def test_author_detail_not_found(self):
