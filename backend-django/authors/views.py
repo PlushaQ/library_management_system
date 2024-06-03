@@ -2,7 +2,7 @@ from rest_framework import generics
 from rest_framework.permissions import AllowAny
 
 from .models import Author
-from .serializers import AuthorDetailsSerializer, AuthorToListSerializer
+from .serializers import AuthorDetailsSerializer, AuthorListSerializer
 
 
 class AuthorList(generics.ListAPIView):
@@ -13,7 +13,7 @@ class AuthorList(generics.ListAPIView):
     """
     permission_classes = [AllowAny]
     queryset = Author.objects.all()
-    serializer_class = AuthorToListSerializer
+    serializer_class = AuthorListSerializer
 
     def get_queryset(self):
         queryset = Author.objects.all() 
@@ -26,7 +26,7 @@ class AuthorList(generics.ListAPIView):
         if tag_id:
             queryset = queryset.filter(tags__id=tag_id)
         if category_id:
-            queryset = queryset.filter(category__id=category_id)
+            queryset = queryset.filter(categories__id=category_id)
         
         return queryset
     
