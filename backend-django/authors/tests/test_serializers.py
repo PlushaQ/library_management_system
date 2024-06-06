@@ -7,16 +7,19 @@ from datetime import date
 class AuthorSerializerTestCase(TestCase):
 
     def setUp(self):
+        # Create tags and categories
         self.category1 = AuthorCategory.objects.create(name="Fiction")
         self.category2 = AuthorCategory.objects.create(name="Drama")
         self.tag1 = AuthorTag.objects.create(name="bestseller")
         self.tag2 = AuthorTag.objects.create(name="contemporary")
 
+        # Define author short data 
         self.author_data = {
             'id': 1,
             'name': 'Test author'
         }
 
+        # Define author data to lists
         self.author_list_data = {
             'id': 1,
             'name': 'Test author',
@@ -25,6 +28,7 @@ class AuthorSerializerTestCase(TestCase):
             'tags': [self.tag1.id, self.tag2.id],
         }
 
+        # Define detailed author's data
         self.author_details_data = {
             'id': 1,
             'name': 'Test author',
@@ -38,11 +42,17 @@ class AuthorSerializerTestCase(TestCase):
         }
 
     def test_author_serializer(self):
+        """
+        Ensure that AuthorSerializer works.
+        """
         serializer = AuthorSerializer(data=self.author_data)
         self.assertTrue(serializer.is_valid())
         self.assertEqual(serializer.validated_data['name'], self.author_data['name'])
 
     def test_author_list_serializer(self):
+        """
+        Ensure that AuthorListSerializer works.
+        """
         serializer = AuthorListSerializer(data=self.author_list_data)
         self.assertTrue(serializer.is_valid())
         self.assertEqual(serializer.validated_data['name'], self.author_list_data['name'])
@@ -56,6 +66,9 @@ class AuthorSerializerTestCase(TestCase):
             self.author_list_data['tags']
         )
     def test_author_details_serializer_valid(self):
+        """
+        Ensure that AuthorDetailsSerializer works.
+        """
         serializer = AuthorDetailsSerializer(data=self.author_details_data)
         self.assertTrue(serializer.is_valid())
         self.assertEqual(serializer.validated_data['name'], self.author_details_data['name'])
@@ -73,6 +86,9 @@ class AuthorSerializerTestCase(TestCase):
         )
 
     def test_author_details_serializer_invalid(self):
+        """
+        Ensure that AuthorDetailsSerializer rejects invalid data.
+        """
         invalid_data = self.author_details_data.copy()
         invalid_data['birth_date'] = date(2021, 1, 1)  # Birth date is after death date
         serializer = AuthorDetailsSerializer(data=invalid_data)

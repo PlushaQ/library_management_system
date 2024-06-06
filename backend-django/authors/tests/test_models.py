@@ -3,12 +3,15 @@ from ..models import Author, AuthorTag, AuthorCategory
 
 class AuthorModelTests(TestCase):
     def setUp(self):
+        # Create categories
         self.category1 = AuthorCategory.objects.create(name="Fiction")
         self.category2 = AuthorCategory.objects.create(name="Non-Fiction")
 
+        # Create tags
         self.tag1 = AuthorTag.objects.create(name="Bestseller")
         self.tag2 = AuthorTag.objects.create(name="Debut")
 
+        # Create example authors
         self.author1 = Author.objects.create(
             name="Author One",
             short_biography="Short bio of Author One",
@@ -25,7 +28,8 @@ class AuthorModelTests(TestCase):
             website="http://authortwo.com",
             photo='/authors/photos/authortwo.jpg',
         )
-
+        
+        # Add categories and tags to author
         self.author1.categories.add(self.category1)
         self.author1.tags.add(self.tag1)
         self.author2.categories.add(self.category2)
