@@ -49,17 +49,19 @@ class Author(models.Model):
     long_biography = models.TextField()
     birth_date = models.DateField(blank=True, null=True)
     death_date = models.DateField(blank=True, null=True)
-    categories = models.ManyToManyField(AuthorCategory, blank=True, null=True)
-    tags = models.ManyToManyField(AuthorTag, blank=True, null=True)
+    categories = models.ManyToManyField(AuthorCategory, blank=True)
+    tags = models.ManyToManyField(AuthorTag, blank=True)
     website = models.URLField(null=True, blank=True)
     photo = models.ImageField(
         upload_to=upload_to,
-        default='/authors/photos/default.jpg',
+        default='authors/photos/default.jpg',
         )
     
     
     class Meta:
         ordering = ('name', )
+        verbose_name = 'Author'
+        verbose_name_plural = 'Authors'
     
     def __str__(self) -> str:
         return self.name
