@@ -1,5 +1,7 @@
 from django.db import models
 from utils.custom_upload_path import CustomUploadPath
+from django.template.defaultfilters import slugify
+from uuid import uuid4
 
 from authors.models import Author
 
@@ -77,9 +79,14 @@ class Book(models.Model):
     edition = models.CharField(max_length=50, blank=True)
     series = models.ForeignKey(Series, on_delete=models.SET_NULL, null=True, blank=True)
     volume = models.PositiveIntegerField(null=True, blank=True)
+    slug = models.SlugField(blank=True, unique=True)
 
     def __str__(self) -> str:
         return f'{self.title} by {self.author}'
+    
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title) + '-' + uuid4()[:4]
+        super().save(self, *args, **kwargs)
     
 class BookInstance(models.Model):
     """
