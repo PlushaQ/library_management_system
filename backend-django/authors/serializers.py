@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Author
+from .models import Author, AuthorCategory, AuthorTag
 
 class AuthorCategorySerializer(serializers.ModelSerializer):
     """
