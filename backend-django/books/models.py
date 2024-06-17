@@ -1,8 +1,8 @@
 from django.db import models
-from utils.custom_upload_path import CustomUploadPath
 from django.template.defaultfilters import slugify
 from uuid import uuid4
 
+from utils.custom_upload_path import CustomUploadPath
 from authors.models import Author
 
 class Category(models.Model):
@@ -65,27 +65,32 @@ class Book(models.Model):
     :returns: String representation of the book.
     """
 
-    title = models.TextField(max_length=255, blank=False)
-    author = models.ForeignKey(Author, on_delete=models.PROTECT, related_name='books')
+    title = models.CharField(max_length=255, blank=False)
+    author = models.ForeignKey('Author', on_delete=models.PROTECT, related_name='books')
     cover = models.ImageField(
         upload_to=upload_to,
         default='/books/covers/default.jpg',
         )
     description = models.TextField(max_length=5000)
-    category = models.ManyToManyField(Category, blank=True)
+    category = models.ManyToManyField('Category', blank=True)
     publication_date = models.DateField()
-    isbn = models.CharField(max_length=13)
-    tags = models.ManyToManyField(Tag, blank=True)
+    isbn = models.CharField(max_length=13, unique=True)
+    tags = models.ManyToManyField('Tag', blank=True)
     edition = models.CharField(max_length=50, blank=True)
-    series = models.ForeignKey(Series, on_delete=models.SET_NULL, null=True, blank=True)
+    series = models.ForeignKey('Series', on_delete=models.SET_NULL, null=True, blank=True)
     volume = models.PositiveIntegerField(null=True, blank=True)
     slug = models.SlugField(blank=True, unique=True)
 
     def __str__(self) -> str:
         return f'{self.title} by {self.author}'
+
+    def get_number_of_book_instance(self):
+        """ Returns number of book instances """ 
+        return self.instances.count()
     
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.title) + '-' + uuid4()[:4]
+        if not self.slug:
+            self.slug = slugify(self.title) + '-' + str(uuid4())[:4]
         super().save(self, *args, **kwargs)
     
 class BookInstance(models.Model):
