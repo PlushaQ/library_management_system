@@ -3,7 +3,7 @@ from utils.custom_upload_path import CustomUploadPath
 
 # Create your models here.
 
-upload_to = CustomUploadPath('books/covers')
+upload_to = CustomUploadPath('authors/photos')
 
 class AuthorTag(models.Model):
     """
@@ -44,6 +44,7 @@ class Author(models.Model):
     :param photo: A profile picture or portrait of the author.
     :returns: String representation of the author.
     """
+    
     name = models.CharField(max_length=100, unique=True)
     short_biography = models.TextField(max_length=1000)
     long_biography = models.TextField()
