@@ -66,18 +66,18 @@ class Book(models.Model):
     """
 
     title = models.CharField(max_length=255, blank=False)
-    author = models.ForeignKey('Author', on_delete=models.PROTECT, related_name='books')
+    author = models.ForeignKey(Author, on_delete=models.PROTECT, related_name='books')
     cover = models.ImageField(
         upload_to=upload_to,
         default='/books/covers/default.jpg',
         )
     description = models.TextField(max_length=5000)
-    category = models.ManyToManyField('Category', blank=True)
+    category = models.ManyToManyField(Category, blank=True)
     publication_date = models.DateField()
     isbn = models.CharField(max_length=13, unique=True)
-    tags = models.ManyToManyField('Tag', blank=True)
+    tags = models.ManyToManyField(Tag, blank=True)
     edition = models.CharField(max_length=50, blank=True)
-    series = models.ForeignKey('Series', on_delete=models.SET_NULL, null=True, blank=True)
+    series = models.ForeignKey(Series, on_delete=models.SET_NULL, null=True, blank=True)
     volume = models.PositiveIntegerField(null=True, blank=True)
     slug = models.SlugField(blank=True, unique=True)
 
