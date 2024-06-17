@@ -5,7 +5,7 @@ from uuid import uuid4
 @deconstructible
 class CustomUploadPath:
     """
-    Generates upload path for book covers.
+    Generates upload path for image files.
 
     :param filename: Name of the file.
     :returns: Upload path for the book cover.
