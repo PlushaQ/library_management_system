@@ -78,7 +78,19 @@ The frontend of this application is built with React. For detailed setup instruc
 
 ## Running the Application
 ### Using Docker
-In making
+
+To run the application using Docker, follow these steps:
+
+1. Make sure Docker is installed and running on your machine.
+2. Build the Docker images for the backend and frontend:
+   ```bash
+   docker-compose build
+   ```
+3. Start the application using Docker Compose:
+   ```bash
+   docker-compose up
+   ```
+4. The backend server will be accessible at http://localhost:8000 and the frontend server at http://localhost:3000.
 
 ### Running Locally
 #### Backend
