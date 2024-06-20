@@ -37,7 +37,7 @@ cd library_management_system
 ```bash
 cd backend-django
 python -m venv env
-rce env/bin/activate  # On Windows use `env\Scripts\activate`
+source env/bin/activate  # On Windows use `env\Scripts\activate`
 pip install -r requirements.txt
 ```
 
@@ -82,11 +82,25 @@ In making
 
 ### Running Locally
 #### Backend
+Before starting your app make sure you have .env file within main library_management_system or you can create a file .env  and make its content to:
+```bash
+DATABASE_USER=your_postgres_name
+DATABASE_PASSWORD=your_password
+SECRET_KEY=your_secret_key
+```
+
 Start the Django development server:
 ```
 cd backend-django
 source env/bin/activate
 python manage.py runserver
+```
+
+If you run aplication for the first time make sure to make migrations.
+You can do it by:
+```bash
+python manage.py makemigrations
+python manage.py migrate
 ```
 
 The backend server will be running at http://localhost:8000.
