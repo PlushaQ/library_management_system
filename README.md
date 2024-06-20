@@ -92,38 +92,76 @@ To run the application using Docker, follow these steps:
    ```
 4. The backend server will be accessible at http://localhost:8000 and the frontend server at http://localhost:3000.
 
+
 ### Running Locally
 #### Backend
-Before starting your app make sure you have .env file within main library_management_system or you can create a file .env  and make its content to:
-```bash
-DATABASE_USER=your_postgres_name
-DATABASE_PASSWORD=your_password
-SECRET_KEY=your_secret_key
-```
 
-Start the Django development server:
-```
-cd backend-django
-source env/bin/activate
-python manage.py runserver
-```
+1. **Set Up Environment Variables**:
+   Before starting your app, ensure you have a `.env` file within the `backend-django` directory. If it doesn't exist, create a file named `.env` with the following content:
 
-If you run aplication for the first time make sure to make migrations.
-You can do it by:
-```bash
-python manage.py makemigrations
-python manage.py migrate
-```
+   ```bash
+   DATABASE_USER=your_postgres_name
+   DATABASE_PASSWORD=your_password
+   SECRET_KEY=your_secret_key
+   ```
 
-The backend server will be running at http://localhost:8000.
+2. **Activate Virtual Environment**:
+   Set up and activate a Python virtual environment:
+
+   ```bash
+   cd backend-django
+   python -m venv env
+   source env/bin/activate  # On Windows use `env\Scripts\activate`
+   ```
+
+3. **Install Dependencies**:
+   Install the necessary Python dependencies:
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. **Run Migrations**:
+   If you are running the application for the first time, make sure to apply the migrations:
+
+   ```bash
+   python manage.py makemigrations
+   python manage.py migrate
+   ```
+
+5. **Start the Development Server**:
+   Start the Django development server:
+
+   ```bash
+   python manage.py runserver
+   ```
+
+   The backend server will be running at [http://localhost:8000](http://localhost:8000).
 
 #### Frontend
-Start the React development server:
-```
-cd frontend-react/library-management-system
-npm start
-```
-The frontend server will be running at http://localhost:3000.
+
+1. **Navigate to Frontend Directory**:
+   Navigate to the React project directory:
+
+   ```bash
+   cd ../frontend-react/library-management-system
+   ```
+
+2. **Install Dependencies**:
+   Install the necessary Node.js dependencies:
+
+   ```bash
+   npm install
+   ```
+
+3. **Start the Development Server**:
+   Start the React development server:
+
+   ```bash
+   npm start
+   ```
+
+   The frontend server will be running at [http://localhost:3000](http://localhost:3000).
 
 ### Contributing
 Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are greatly appreciated.
