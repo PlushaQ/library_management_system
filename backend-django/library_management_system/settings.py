@@ -91,7 +91,7 @@ DATABASES = {
         'NAME': 'library_management_system',
         'USER': os.environ.get('DATABASE_USER'),
         'PASSWORD': os.environ.get('DATABASE_PASSWORD'),
-        'HOST': 'db',
+        'HOST': 'localhost',
         'PORT': '5432',
     }
 }
