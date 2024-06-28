@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import BookCard from './bookCard';
 
 import axiosInstance from '../../axios';
+import { List, ListItem } from '@mui/material';
 
 const BookList = () => {
   const [data, setData] = useState({books: []})
@@ -17,13 +18,13 @@ const BookList = () => {
 
   return (
     <Box sx={{ flexGrow: 1, padding: 2 }}>
-      <Grid container spacing={2}>
+      <List>
         {data.books.map((book, index) => (
-          <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
+          <ListItem key={index} sx={{ padding: 0, mb: 2 }}>
             <BookCard book={book} />
-          </Grid>
+          </ListItem>
         ))}
-      </Grid>
+      </List>
     </Box>
   );
 };

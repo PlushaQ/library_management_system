@@ -91,7 +91,7 @@ class Book(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.title) + '-' + str(uuid4())[:4]
-        super().save(self, *args, **kwargs)
+        super().save(*args, **kwargs)
     
 class BookInstance(models.Model):
     """
