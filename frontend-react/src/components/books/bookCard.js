@@ -4,40 +4,48 @@ import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import Grid from '@mui/material/Grid';
 import { Link } from '@mui/material';
 
 const BookCard = ({ book }) => {
   return (
     <Box sx={{ width: '80%', margin: '0 auto' }}>
-      <Card sx={{ display: 'flex', flexDirection: 'column', height: '100%', width: '100%' }}>
-        <Box sx={{ flexGrow: 1 }}>
-          <CardMedia
-            component="img"
-            image={book.cover}
-            alt={book.title}
-            sx={{ height: 200, objectFit: 'cover' }}
-          />
+      <Card sx={{ display: 'flex', flexDirection: 'row', height: '100%', width: '100%' }}>
+        <CardMedia
+          component="img"
+          image={book.cover}
+          alt={book.title}
+          sx={{ width: 200, objectFit: 'cover' }}
+        />
+        <Box sx={{ display: 'flex', flexDirection: 'column', flexGrow: 1, padding: 2 }}>
+          <CardContent sx={{ flex: '1 0 auto' }}>
+            <Typography variant="h4" component="div">
+              <Link
+                href={`/book-detail/${book.id}`}
+                color='inherit'
+                underline='hover'
+              >
+                {book.title}
+              </Link>
+            </Typography>
+            <Typography variant="subtitle1" color="text.secondary" component="div">
+              <Link
+                href={`/authors/${book.author.id}`}
+                color='inherit'
+                underline='hover'
+              >
+                {book.author.name}
+              </Link>
+            </Typography>
+          </CardContent>
         </Box>
-        <CardContent>
-          <Typography variant="h6" component="div">
-            <Link
-              href={`/book-detail/${book.id}`}
-              color='inherit'
-              underline='hover'
-            >
-              {book.title}
-            </Link>
-          </Typography>
-          <Typography variant="subtitle1" color="text.secondary" component="div">
-            <Link
-              href={`/authors/${book.author.id}`}
-              color='inherit'
-              underline='hover'
-            >
-              {book.author.name}
-            </Link>
-          </Typography>
-        </CardContent>
+        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 2 }}>
+          <Card sx={{ width: 100, height: 100, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <Typography variant="body1">
+              Rating: {book.rating}
+            </Typography>
+          </Card>
+        </Box>
       </Card>
     </Box>
   );
