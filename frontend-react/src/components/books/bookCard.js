@@ -9,13 +9,13 @@ import { Link } from '@mui/material';
 
 const BookCard = ({ book }) => {
   return (
-    <Box sx={{ width: '80%', margin: '0 auto' }}>
-      <Card sx={{ display: 'flex', flexDirection: 'row', height: '100%', width: '100%' }}>
+    <Box sx={{ width: '80%', margin: '0 auto', maxWidth: 800 }}>
+      <Card sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, height: '100%', width: '100%' }}>
         <CardMedia
           component="img"
           image={book.cover}
           alt={book.title}
-          sx={{ width: 200, objectFit: 'cover' }}
+          sx={{ width: { xs: '100%', md: 200 }, height: { xs: 'auto', md: '100%' }, objectFit: 'cover' }}
         />
         <Box sx={{ display: 'flex', flexDirection: 'column', flexGrow: 1, padding: 2 }}>
           <CardContent sx={{ flex: '1 0 auto' }}>
