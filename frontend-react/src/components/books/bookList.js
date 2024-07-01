@@ -24,10 +24,8 @@ const BookList = () => {
             <BookCard book={book} />
           </ListItem>
         ))}
+        <Paginator pageInfo={[]}/>
       </List>
-      <Box mt={2}>
-          <Paginator/>
-        </Box>
     </Box>
     </>
   );
