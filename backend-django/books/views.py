@@ -4,6 +4,7 @@ from rest_framework.permissions import AllowAny
 
 from .models import Book
 from .serializers import BookSerializer
+from utils.paginator import CustomPagination
 # Create your views here.
 
 
@@ -16,6 +17,7 @@ class BookList(generics.ListAPIView):
     permission_classes = [AllowAny]
     queryset = Book.objects.all()
     serializer_class = BookSerializer
+    pagination_class = CustomPagination
 
 
 class BookDetail(generics.RetrieveAPIView):
@@ -37,6 +39,7 @@ class BookByFilter(generics.ListAPIView):
     """
     permission_classes = [AllowAny] 
     serializer_class = BookSerializer
+    pagination_class = CustomPagination
 
     def get_queryset(self):
         queryset = Book.objects.all() 

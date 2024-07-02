@@ -11,7 +11,7 @@ const BookList = () => {
 
   useEffect(() => {
     axiosInstance.get('/books').then((res) => {
-      setData({books: res.data});
+      setData({books: res.data.results});
       console.log(res.data);
     });
   }, [setData]);
