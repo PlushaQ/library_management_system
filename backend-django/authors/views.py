@@ -3,7 +3,7 @@ from rest_framework.permissions import AllowAny
 
 from .models import Author
 from .serializers import AuthorDetailsSerializer, AuthorListSerializer
-
+from utils.paginator import CustomPagination
 
 class AuthorList(generics.ListAPIView):
     """
@@ -14,7 +14,8 @@ class AuthorList(generics.ListAPIView):
     permission_classes = [AllowAny]
     queryset = Author.objects.all()
     serializer_class = AuthorListSerializer
-
+    pagination_class = CustomPagination
+    
     def get_queryset(self):
         queryset = Author.objects.all() 
         
