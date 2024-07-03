@@ -27,6 +27,7 @@ const BookList = () => {
   };
 
   const handlePageChange = (page) => {
+    window.scrollTo({top: 0, behavior: 'smooth'});
     setPageData((prev) => ({ ...prev, current_page: page }));
   };
 
