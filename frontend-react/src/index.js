@@ -17,6 +17,7 @@ import Login from './components/auth/Login'
 import Register from './components/auth/Register'
 import Logout from './components/auth/Logout';
 import BookDetail from './components/books/bookDetail';
+import AuthorList from './components/authors/authorList';
 
 const theme = createTheme()
 
@@ -42,8 +43,11 @@ root.render(
           <Main>
             <Routes>
               <Route exact path="/" element={<Homepage />} />
+              {/* Book routes */}
               <Route path="/books" element={<BookList />} />
               <Route path='/book-detail/:id' element={<BookDetail />} />
+              {/* Authors routes */}
+              <Route path='/authors' element={<AuthorList/>} />
               {/* Auth routes */}
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
