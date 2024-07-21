@@ -11,7 +11,7 @@ import MenuItem from '@mui/material/MenuItem';
 function NavMenu() {
   const pages = [
     {name: 'Books', url: '/books'},
-    {name: 'Second Page', url:'#'},
+    {name: 'Authors', url:'/authors'},
     {name: 'Third Page', url:'#'},];
   // State for menu anchor elements
   const [anchorElNav, setAnchorElNav] = React.useState(null);
