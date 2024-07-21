@@ -3,7 +3,7 @@ import string
 from datetime import datetime, timedelta
 from django.core.management.base import BaseCommand
 from books.models import Book, Category, Tag, Series
-from authors.models import Author  # Adjust the import as necessary
+from authors.models import Author
 from django.utils.text import slugify
 from uuid import uuid4
 
@@ -12,8 +12,8 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
         # Create authors if none exist
-        if not Author.objects.exists():
-            self.stdout.write(self.style.WARNING('No authors found. Creating sample authors...'))
+        if not Author.objects.exists() or Author.objects.count() < 10:
+            self.stdout.write(self.style.WARNING('Too few authors found. Creating sample authors...'))
             self.create_authors()
 
         # Create categories if none exist
@@ -48,7 +48,6 @@ class Command(BaseCommand):
             # Add tags
             book.tags.set(random.sample(list(tags), random.randint(1, len(tags))))
 
-            # Optionally add series
             if series.exists():
                 if random.choice([True, False]):
                     book.series = random.choice(series)
@@ -64,7 +63,13 @@ class Command(BaseCommand):
             {'name': 'Jane Smith'},
             {'name': 'Michael Johnson'},
             {'name': 'Emily Brown'},
-            # Add more sample authors as needed
+            {'name': 'Ralph Done'},
+            {'name': 'Janett Little'},
+            {'name': 'Trevor Homm'},
+            {'name': 'Carl Johnson'},
+            {'name': 'Franklin Michael'},
+            {'name': 'Micheal de Santa'},
+            {'name': 'Woody Panok'},
         ]
 
         for author_data in sample_authors:
@@ -76,7 +81,6 @@ class Command(BaseCommand):
             {'name': 'Science Fiction'},
             {'name': 'Fantasy'},
             {'name': 'Romance'},
-            # Add more sample categories as needed
         ]
 
         for category_data in sample_categories:
